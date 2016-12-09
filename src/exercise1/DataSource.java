@@ -6,10 +6,10 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class DataSource {
-	static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
-	static final String DB_URL = "jdbc:mysql://localhost/EMP";
-	static final String USER = "username";
-	static final String PASS = "password";
+	static final String JDBC_DRIVER = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
+	static final String DB_URL = "jdbc:sqlserver://localhost:1433;databaseName=Games";
+	static final String USER = "user=lliu";
+	static final String PASS = "password=111111";
 	static Connection connection = null;
 
 	private static class DataSourceHolder {  

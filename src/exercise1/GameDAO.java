@@ -3,6 +3,8 @@ package exercise1;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 public class GameDAO {
 	private DataSource db;
@@ -11,21 +13,23 @@ public class GameDAO {
 		db = source;
 	}
 
-	public GameModel getGameModelById(int Id) {
+	public List<GameModel> getGameModel() {
+		List<GameModel> result = new ArrayList<GameModel>();
 		try {
-			GameModel g = new GameModel();
+
 			Statement stmt = db.getConnection().createStatement();
 			String sql;
-			sql = "SELECT id, first, last, age FROM games where id=?";
+			sql = "SELECT game_id, game_title FROM games";
 			ResultSet rs = stmt.executeQuery(sql);
 
 			while (rs.next()) {
-				g.setId(rs.getInt("id"));
-				g.setGameTitle(rs.getString("gametitle"));
+				GameModel g = new GameModel();
+				g.setId(rs.getInt("game_id"));
+				g.setGameTitle(rs.getString("game_title"));
+				result.add(g);
 			}
-
 			db.closeConnection(rs, stmt);
-			return g;
+			return result;
 		} catch (SQLException se) {
 			// Handle errors for JDBC
 			se.printStackTrace();
@@ -33,21 +37,15 @@ public class GameDAO {
 			// Handle errors for Class.forName
 			e.printStackTrace();
 		}
-		return null;
+		return result;
 	}
-	
+
 	public void addGameModel(GameModel g) {
 		try {
 			Statement stmt = db.getConnection().createStatement();
 			String sql;
-			sql = "INSERT INTO id, first, last, age FROM games where id=?";
+			sql = "INSERT INTO game (game_id, game_title) VALUES (" + g.getId() + ", '" + g.getGameTitle() + "')";
 			ResultSet rs = stmt.executeQuery(sql);
-
-			while (rs.next()) {
-				g.setId(rs.getInt("id"));
-				g.setGameTitle(rs.getString("gametitle"));
-			}
-
 			db.closeConnection(rs, stmt);
 		} catch (SQLException se) {
 			// Handle errors for JDBC

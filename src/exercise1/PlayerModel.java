@@ -7,7 +7,7 @@ public class PlayerModel {
 	private String address;
 	private String postCode;
 	private String province;
-	private String phoneNumber;
+	private int phoneNumber;
 	
 	
 	
@@ -47,10 +47,10 @@ public class PlayerModel {
 	public void setProvince(String province) {
 		this.province = province;
 	}
-	public String getPhoneNumber() {
+	public int getPhoneNumber() {
 		return phoneNumber;
 	}
-	public void setPhoneNumber(String phoneNumber) {
+	public void setPhoneNumber(int phoneNumber) {
 		this.phoneNumber = phoneNumber;
 	}
 
