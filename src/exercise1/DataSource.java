@@ -6,11 +6,20 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class DataSource {
+	/*
 	static final String JDBC_DRIVER = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
 	static final String DB_URL = "jdbc:sqlserver://localhost:1433;databaseName=Games";
 	static final String USER = "user=lliu";
 	static final String PASS = "password=111111";
 	static Connection connection = null;
+	*/
+	
+	static final String JDBC_DRIVER = "org.mariadb.jdbc.Driver";
+	static final String DB_URL = "jdbc:mariadb://localhost:3306/game";
+	static final String USER = "player";
+	static final String PASS = "12345";
+	static Connection connection = null;
+
 
 	private static class DataSourceHolder {  
         private static final DataSource INSTANCE = new DataSource();  
@@ -27,8 +36,6 @@ public class DataSource {
 			try {
 				Class.forName(JDBC_DRIVER);
 				conn = DriverManager.getConnection(DB_URL, USER, PASS);
-
-				conn.close();
 			} catch (SQLException se) {
 				// Handle errors for JDBC
 				se.printStackTrace();

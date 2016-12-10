@@ -19,7 +19,7 @@ public class PlayerDAO {
 
 			Statement stmt = db.getConnection().createStatement();
 			String sql;
-			sql = "SELECT game_id, game_title FROM games";
+			sql = "SELECT * FROM player";
 			ResultSet rs = stmt.executeQuery(sql);
 
 			while (rs.next()) {
@@ -30,7 +30,7 @@ public class PlayerDAO {
 				p.setAddress(rs.getString("address"));
 				p.setPostCode(rs.getString("postal_code"));
 				p.setProvince(rs.getString("province"));
-				p.setPhoneNumber(rs.getInt("phone_number"));
+				p.setPhoneNumber(rs.getString("phone_number"));
 				result.add(p);
 			}
 			db.closeConnection(rs, stmt);
@@ -49,10 +49,9 @@ public class PlayerDAO {
 		try {
 			Statement stmt = db.getConnection().createStatement();
 			String sql;
-			sql = "INSERT INTO player (player_id, first_name, last_name, address, postal_code, province, phone_number) "
-					+ "VALUES (" + p.getId() + ", '" + p.getFirstName() + ", '" + p.getLastName() + ", '"
-					+ p.getAddress() + ", '" + p.getPostCode() + ", '" + p.getProvince() + ", " + p.getPhoneNumber()
-					+ ")";
+			sql = "INSERT INTO player (first_name, last_name, address, postal_code, province, phone_number) "
+					+ "VALUES ('" + p.getFirstName() + "', '" + p.getLastName() + "', '" + p.getAddress() + "', '"
+					+ p.getPostCode() + "', '" + p.getProvince() + "', '" + p.getPhoneNumber() + "')";
 			ResultSet rs = stmt.executeQuery(sql);
 			db.closeConnection(rs, stmt);
 		} catch (SQLException se) {
@@ -68,9 +67,9 @@ public class PlayerDAO {
 		try {
 			Statement stmt = db.getConnection().createStatement();
 			String sql;
-			sql = "UPDATE player SET player_id=" + p.getId() + ", first_name='" + p.getFirstName()
-					+ ", last_name='" + p.getLastName() + ", address='" + p.getAddress() + ", post_code='"
-					+ p.getPostCode() + ", province='" + p.getProvince() + ", phone_number=" + p.getPhoneNumber() + ")";
+			sql = "UPDATE player SET first_name='" + p.getFirstName() + "', last_name='" + p.getLastName()
+					+ "', address='" + p.getAddress() + "', post_code='" + p.getPostCode() + "', province='"
+					+ p.getProvince() + "', phone_number='" + p.getPhoneNumber() + "') WHERE player_id=" + p.getId();
 			ResultSet rs = stmt.executeQuery(sql);
 			db.closeConnection(rs, stmt);
 		} catch (SQLException se) {

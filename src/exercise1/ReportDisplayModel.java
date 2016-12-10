@@ -3,6 +3,9 @@ package exercise1;
 import java.util.Calendar;
 
 public class ReportDisplayModel {
+	private int id;
+	private int playerId;
+	private int gameId;
 	private String playerName;
 	private String gameName;
 	private Calendar playingDate;
@@ -31,5 +34,23 @@ public class ReportDisplayModel {
 	}
 	public void setScore(int score) {
 		this.score = score;
+	}
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
+	public int getPlayerId() {
+		return playerId;
+	}
+	public void setPlayerId(int playerId) {
+		this.playerId = playerId;
+	}
+	public int getGameId() {
+		return gameId;
+	}
+	public void setGameId(int gameId) {
+		this.gameId = gameId;
 	}
 }

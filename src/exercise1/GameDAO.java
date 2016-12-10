@@ -16,10 +16,9 @@ public class GameDAO {
 	public List<GameModel> getGameModel() {
 		List<GameModel> result = new ArrayList<GameModel>();
 		try {
-
 			Statement stmt = db.getConnection().createStatement();
 			String sql;
-			sql = "SELECT game_id, game_title FROM games";
+			sql = "SELECT game_id, game_title FROM game";
 			ResultSet rs = stmt.executeQuery(sql);
 
 			while (rs.next()) {
@@ -44,7 +43,7 @@ public class GameDAO {
 		try {
 			Statement stmt = db.getConnection().createStatement();
 			String sql;
-			sql = "INSERT INTO game (game_id, game_title) VALUES (" + g.getId() + ", '" + g.getGameTitle() + "')";
+			sql = "INSERT INTO game (game_title) VALUES ('" + g.getGameTitle() + "')";
 			ResultSet rs = stmt.executeQuery(sql);
 			db.closeConnection(rs, stmt);
 		} catch (SQLException se) {
