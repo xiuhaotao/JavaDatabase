@@ -1,4 +1,4 @@
-package view;
+package exercise1.view;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -21,8 +21,8 @@ import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
 import exercise1.DataSource;
-import model.ReportDisplayModel;
-import model.ScoreDAO;
+import exercise1.model.ReportDisplayModel;
+import exercise1.model.ScoreDAO;
 
 public class MainWin extends JFrame {
 	/**

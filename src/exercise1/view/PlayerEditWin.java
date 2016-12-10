@@ -1,4 +1,4 @@
-package view;
+package exercise1.view;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
@@ -15,8 +15,8 @@ import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
 import exercise1.DataSource;
-import model.PlayerDAO;
-import model.PlayerModel;
+import exercise1.model.PlayerDAO;
+import exercise1.model.PlayerModel;
 
 public class PlayerEditWin extends JDialog {
 	/**

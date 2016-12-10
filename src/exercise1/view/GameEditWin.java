@@ -1,4 +1,4 @@
-package view;
+package exercise1.view;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
@@ -14,8 +14,8 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 import exercise1.DataSource;
-import model.GameDAO;
-import model.GameModel;
+import exercise1.model.GameDAO;
+import exercise1.model.GameModel;
 
 public class GameEditWin extends JDialog {
 

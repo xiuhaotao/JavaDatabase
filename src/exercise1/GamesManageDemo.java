@@ -2,7 +2,7 @@ package exercise1;
 
 import javax.swing.JFrame;
 
-import view.MainWin;
+import exercise1.view.MainWin;
 
 public class GamesManageDemo {
 

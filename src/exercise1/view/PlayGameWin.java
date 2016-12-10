@@ -1,4 +1,4 @@
-package view;
+package exercise1.view;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
@@ -29,12 +29,12 @@ import org.jdatepicker.impl.JDatePickerImpl;
 import org.jdatepicker.impl.UtilDateModel;
 
 import exercise1.DataSource;
-import model.GameDAO;
-import model.GameModel;
-import model.PlayerDAO;
-import model.PlayerModel;
-import model.ScoreDAO;
-import model.ScoreModel;
+import exercise1.model.GameDAO;
+import exercise1.model.GameModel;
+import exercise1.model.PlayerDAO;
+import exercise1.model.PlayerModel;
+import exercise1.model.ScoreDAO;
+import exercise1.model.ScoreModel;
 
 public class PlayGameWin extends JDialog {
 	/**
