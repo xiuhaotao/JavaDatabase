@@ -63,6 +63,7 @@ public class GamesManageDemo extends JFrame {
 		table = new JTable(data, columnNames);
 		table.setPreferredScrollableViewportSize(new Dimension(500, 70));
 		table.setFillsViewportHeight(true);
+		JScrollPane scrollPane = new JScrollPane(table);
 
 		pEast.setLayout(new GridLayout(4, 2, 5, 5));
 		pEast.add(lblQueryPId);
@@ -73,17 +74,13 @@ public class GamesManageDemo extends JFrame {
 		pEast.add(btnPlayGame);
 
 		// JTable resultTable = new JTable(reportDisplayModel);
-		queryArea = new JTextArea();
 		eastBox.add(pEast);
 
 		// eastBox.add(new JScrollPane(resultTable));
-		eastBox.add(queryArea);
+		eastBox.add(scrollPane);
 		pMain.add(eastBox);
 		add(pMain);
-		JScrollPane scrollPane = new JScrollPane(table);
 		 
-        //Add the scroll pane to this panel.
-        add(scrollPane);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setSize(400, 500); // set window size
 		setVisible(true);
