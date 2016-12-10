@@ -1,4 +1,4 @@
-package exercise1;
+package model;
 
 import java.util.Calendar;
 

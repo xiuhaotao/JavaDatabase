@@ -1,4 +1,4 @@
-package exercise1;
+package model;
 
 public class PlayerModel {
 	private int id;

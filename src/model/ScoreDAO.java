@@ -1,4 +1,4 @@
-package exercise1;
+package model;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -7,6 +7,8 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+
+import exercise1.DataSource;
 
 public class ScoreDAO {
 	private DataSource db;

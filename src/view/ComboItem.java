@@ -1,4 +1,4 @@
-package exercise1;
+package view;
 
 public class ComboItem {
 	private int value;
