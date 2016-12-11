@@ -46,6 +46,34 @@ public class PlayerDAO {
 		}
 		return result;
 	}
+	
+	public PlayerModel getPlayerModelById(int id) {
+		PlayerModel result = null;
+		try {
+			Statement stmt = db.getConnection().createStatement();
+			String sql;
+			sql = "SELECT * FROM player where player_id=" + id;
+			ResultSet rs = stmt.executeQuery(sql);
+			if (rs.next()) {
+				result = new PlayerModel();
+				result.setId(rs.getInt("player_id"));
+				result.setFirstName(rs.getString("first_name"));
+				result.setLastName(rs.getString("last_name"));
+				result.setAddress(rs.getString("address"));
+				result.setPostCode(rs.getString("postal_code"));
+				result.setProvince(rs.getString("province"));
+				result.setPhoneNumber(rs.getString("phone_number"));
+			}
+			db.closeConnection(rs, stmt);
+		} catch (SQLException se) {
+			// Handle errors for JDBC
+			se.printStackTrace();
+		} catch (Exception e) {
+			// Handle errors for Class.forName
+			e.printStackTrace();
+		}
+		return result;
+	}
 
 	public void addPlayerModel(PlayerModel p) {
 		try {

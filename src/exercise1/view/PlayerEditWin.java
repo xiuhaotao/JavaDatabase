@@ -28,7 +28,7 @@ public class PlayerEditWin extends JDialog {
 			phoneNumberTextField;
 	private DataSource ds;
 
-	public PlayerEditWin(MainWin frame) {
+	public PlayerEditWin(MainWin frame, String actionName, int id) {
 		super(frame, "Player", true);
 		ds = DataSource.getInstance();
 		setBounds(100, 100, 240, 329);
@@ -43,7 +43,6 @@ public class PlayerEditWin extends JDialog {
 			panel.setLayout(new FlowLayout(FlowLayout.RIGHT, 5, 5));
 			{
 				JPanel panel_1 = new JPanel();
-				FlowLayout flowLayout = (FlowLayout) panel_1.getLayout();
 				panel.add(panel_1);
 				{
 					JLabel lblFirstName = new JLabel("First Name");
@@ -57,7 +56,6 @@ public class PlayerEditWin extends JDialog {
 			}
 			{
 				JPanel panel_1 = new JPanel();
-				FlowLayout flowLayout = (FlowLayout) panel_1.getLayout();
 				panel.add(panel_1);
 				{
 					JLabel lblLastName = new JLabel("Last Name");
@@ -138,6 +136,18 @@ public class PlayerEditWin extends JDialog {
 				cancelButton.setActionCommand("Cancel");
 				buttonPane.add(cancelButton);
 				cancelButton.addActionListener(cancelBtnHandler);
+			}
+		}
+		if (actionName.equals("Update")) {
+			PlayerDAO dao = new PlayerDAO(ds);
+			PlayerModel dto = dao.getPlayerModelById(id);
+			if(null != dto) {
+				firstNameTextField.setText(dto.getFirstName());
+				lastNameTextField.setText(dto.getLastName());
+				addressTextField.setText(dto.getAddress());
+				postalCodeTextField.setText(dto.getPostCode());
+				provinceTextField.setText(dto.getProvince());
+				phoneNumberTextField.setText(dto.getPhoneNumber());
 			}
 		}
 	}

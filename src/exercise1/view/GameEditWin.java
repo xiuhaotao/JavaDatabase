@@ -44,6 +44,7 @@ public class GameEditWin extends JDialog {
 		}
 		{
 			gameTextField = new JTextField();
+			gameTextField.setInputVerifier(new TextInputVerifier());
 			contentPanel.add(gameTextField);
 			gameTextField.setColumns(10);
 		}

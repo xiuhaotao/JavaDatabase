@@ -5,6 +5,7 @@ import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -16,12 +17,16 @@ import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
+import javax.swing.JFormattedTextField;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.text.NumberFormatter;
 
 import org.jdatepicker.impl.DateComponentFormatter;
 import org.jdatepicker.impl.JDatePanelImpl;
@@ -44,11 +49,13 @@ public class PlayGameWin extends JDialog {
 	private final JPanel contentPanel = new JPanel();
 	private JDatePickerImpl datePicker;
 	private JComboBox<ComboItem> playerList, gameList;
-	private JTextField scoreTextField;
+	private JFormattedTextField scoreTextField;
+	private MainWin pFrame;
 	private DataSource ds;
 
 	public PlayGameWin(MainWin frame) {
 		super(frame, "Play Game", true);
+		pFrame = frame;
 		ds = DataSource.getInstance();
 		setBounds(100, 100, 320, 223);
 		setResizable(false);
@@ -100,7 +107,7 @@ public class PlayGameWin extends JDialog {
 				p.put("text.month", "Month");
 				p.put("text.year", "Year");
 				JDatePanelImpl datePanel = new JDatePanelImpl(model, p);
-				datePicker = new JDatePickerImpl(datePanel, new DateComponentFormatter());				
+				datePicker = new JDatePickerImpl(datePanel, new DateComponentFormatter());
 				datePicker.setBounds(220, 350, 120, 30);
 				panel.add(datePicker);
 			}
@@ -110,7 +117,14 @@ public class PlayGameWin extends JDialog {
 				panel.add(lblScore);
 			}
 			{
-				scoreTextField = new JTextField();
+				NumberFormat format = NumberFormat.getInstance();
+				NumberFormatter formatter = new NumberFormatter(format);
+				formatter.setValueClass(Integer.class);
+				formatter.setMinimum(0);
+				formatter.setMaximum(Integer.MAX_VALUE);
+				formatter.setAllowsInvalid(false);
+				formatter.setCommitsOnValidEdit(true);
+				scoreTextField = new JFormattedTextField(formatter);
 				panel.add(scoreTextField);
 				scoreTextField.setColumns(10);
 			}
@@ -133,8 +147,7 @@ public class PlayGameWin extends JDialog {
 				cancelButton.addActionListener(cancelBtnHandler);
 			}
 		}
-		
-		
+
 	}
 
 	ActionListener playBtnHandler = new ActionListener() {
@@ -142,17 +155,18 @@ public class PlayGameWin extends JDialog {
 		public void actionPerformed(ActionEvent e) {
 			ScoreDAO dao = new ScoreDAO(ds);
 			ScoreModel s = new ScoreModel();
-			s.setPlayerId(((ComboItem)playerList.getSelectedItem()).getValue());
-			s.setGameId(((ComboItem)gameList.getSelectedItem()).getValue());
+			s.setPlayerId(((ComboItem) playerList.getSelectedItem()).getValue());
+			s.setGameId(((ComboItem) gameList.getSelectedItem()).getValue());
 			Calendar selectedValue = Calendar.getInstance();
-			selectedValue.setTime((Date)datePicker.getModel().getValue());
+			selectedValue.setTime((Date) datePicker.getModel().getValue());
 			s.setPlayDate(selectedValue);
 			s.setScore(Integer.parseInt(scoreTextField.getText()));
 			dao.addScoreModel(s);
+			pFrame.updateTable();
 			dispose();
 		}
 	};
-	
+
 	ActionListener cancelBtnHandler = new ActionListener() {
 		@Override
 		public void actionPerformed(ActionEvent e) {
