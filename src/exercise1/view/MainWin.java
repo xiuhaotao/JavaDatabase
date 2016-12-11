@@ -142,7 +142,7 @@ public class MainWin extends JFrame {
 		for (int i = 0; i < result.size(); i++) {
 			data[0] = result.get(i).getPlayerName();
 			data[1] = result.get(i).getGameName();
-			data[2] = new SimpleDateFormat("DD-MMM-yyyy").format(result.get(i).getPlayingDate().getTime());
+			data[2] = new SimpleDateFormat("yyyy-MMM-DD").format(result.get(i).getPlayingDate().getTime());
 			data[3] = String.valueOf(result.get(i).getScore());
 			tableModel.addRow(data);
 		}

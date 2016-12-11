@@ -6,6 +6,7 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.NumberFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -102,6 +103,9 @@ public class PlayGameWin extends JDialog {
 			}
 			{
 				UtilDateModel model = new UtilDateModel();
+				LocalDate now = LocalDate.now();
+				model.setDate(now.getYear(), now.getMonthValue()-1, now.getDayOfMonth());
+				model.setSelected(true);
 				Properties p = new Properties();
 				p.put("text.today", "Today");
 				p.put("text.month", "Month");
@@ -160,7 +164,7 @@ public class PlayGameWin extends JDialog {
 			Calendar selectedValue = Calendar.getInstance();
 			selectedValue.setTime((Date) datePicker.getModel().getValue());
 			s.setPlayDate(selectedValue);
-			s.setScore(Integer.parseInt(scoreTextField.getText()));
+			s.setScore(Integer.parseInt(scoreTextField.getText().replaceAll(",", "")));
 			dao.addScoreModel(s);
 			pFrame.updateTable();
 			dispose();

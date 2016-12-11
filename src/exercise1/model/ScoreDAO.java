@@ -59,8 +59,8 @@ public class ScoreDAO {
 			sql = "INSERT INTO playerandgame (game_id, player_id, playing_date, score) VALUES ("
 					+ s.getGameId() + ", " + s.getPlayerId() + ", '" + time.toString() + "', "
 					+ s.getScore() + ")";
-			ResultSet rs = stmt.executeQuery(sql);
-			db.closeConnection(rs, stmt);
+			stmt.execute(sql);
+			db.closeConnection(null, stmt);
 		} catch (SQLException se) {
 			// Handle errors for JDBC
 			se.printStackTrace();

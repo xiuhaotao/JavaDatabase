@@ -82,8 +82,8 @@ public class PlayerDAO {
 			sql = "INSERT INTO player (first_name, last_name, address, postal_code, province, phone_number) "
 					+ "VALUES ('" + p.getFirstName() + "', '" + p.getLastName() + "', '" + p.getAddress() + "', '"
 					+ p.getPostCode() + "', '" + p.getProvince() + "', '" + p.getPhoneNumber() + "')";
-			ResultSet rs = stmt.executeQuery(sql);
-			db.closeConnection(rs, stmt);
+			stmt.execute(sql);
+			db.closeConnection(null, stmt);
 		} catch (SQLException se) {
 			// Handle errors for JDBC
 			se.printStackTrace();
@@ -100,8 +100,8 @@ public class PlayerDAO {
 			sql = "UPDATE player SET first_name='" + p.getFirstName() + "', last_name='" + p.getLastName()
 					+ "', address='" + p.getAddress() + "', post_code='" + p.getPostCode() + "', province='"
 					+ p.getProvince() + "', phone_number='" + p.getPhoneNumber() + "') WHERE player_id=" + p.getId();
-			ResultSet rs = stmt.executeQuery(sql);
-			db.closeConnection(rs, stmt);
+			stmt.execute(sql);
+			db.closeConnection(null, stmt);
 		} catch (SQLException se) {
 			// Handle errors for JDBC
 			se.printStackTrace();

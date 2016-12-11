@@ -6,19 +6,19 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class DataSource {
-	/*
+	// for MSSQL
 	static final String JDBC_DRIVER = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
-	static final String DB_URL = "jdbc:sqlserver://localhost:1433;databaseName=Games";
-	static final String USER = "user=lliu";
-	static final String PASS = "password=111111";
-	static Connection connection = null;
-	*/
-	
-	static final String JDBC_DRIVER = "org.mariadb.jdbc.Driver";
-	static final String DB_URL = "jdbc:mariadb://localhost:3306/game";
+	static final String DB_URL = "jdbc:sqlserver://localhost:1433;databaseName=game";
 	static final String USER = "player";
-	static final String PASS = "12345";
+	static final String PASS = "123";
 	static Connection connection = null;
+	
+	// for MySQL
+	//static final String JDBC_DRIVER = "org.mariadb.jdbc.Driver";
+	//static final String DB_URL = "jdbc:mariadb://localhost:3306/game";
+	//static final String USER = "player";
+	//static final String PASS = "12345";
+	//static Connection connection = null;
 
 
 	private static class DataSourceHolder {  

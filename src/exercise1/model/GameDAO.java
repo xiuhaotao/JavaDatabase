@@ -46,8 +46,8 @@ public class GameDAO {
 			Statement stmt = db.getConnection().createStatement();
 			String sql;
 			sql = "INSERT INTO game (game_title) VALUES ('" + g.getGameTitle() + "')";
-			ResultSet rs = stmt.executeQuery(sql);
-			db.closeConnection(rs, stmt);
+			stmt.execute(sql);
+			db.closeConnection(null, stmt);
 		} catch (SQLException se) {
 			// Handle errors for JDBC
 			se.printStackTrace();
