@@ -1,5 +1,5 @@
 CREATE DATABASE `game` CHARACTER SET utf8 COLLATE utf8_general_ci;
-GRANT ALL ON `game`.* TO `player`@localhost IDENTIFIED BY '12345’;
+GRANT ALL ON `game`.* TO `player`@localhost IDENTIFIED BY '12345';
 
 CREATE TABLE `game` (
 	`game_id` bigint(20) NOT NULL AUTO_INCREMENT,
