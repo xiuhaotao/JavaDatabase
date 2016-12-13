@@ -12,6 +12,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Vector;
 
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -91,13 +92,8 @@ public class MainWin extends JFrame {
 		panel_5.add(lblPlayerName);
 
 		{
-			Vector<ComboItem> pModel = new Vector<ComboItem>();
-			pModel.add(new ComboItem(-1, "ALL"));
-			PlayerDAO pDAO = new PlayerDAO(ds);
-			for (PlayerModel m : pDAO.getPlayerModel()) {
-				pModel.add(new ComboItem(m.getId(), m.getFirstName() + " " + m.getLastName()));
-			}
-			playerList = new JComboBox<ComboItem>(pModel);
+			playerList = new JComboBox<ComboItem>();
+			updateComboBox();
 			playerList.addActionListener(playerListHandler);
 			panel_5.add(playerList);
 		}
@@ -127,6 +123,17 @@ public class MainWin extends JFrame {
 		panel_1.add(scrollPane);
 	}
 
+	public void updateComboBox() {
+		playerList.removeAllItems();
+		Vector<ComboItem> pModel = new Vector<ComboItem>();
+		pModel.add(new ComboItem(-1, "ALL"));
+		PlayerDAO pDAO = new PlayerDAO(ds);
+		for (PlayerModel m : pDAO.getPlayerModel()) {
+			pModel.add(new ComboItem(m.getId(), m.getFirstName() + " " + m.getLastName()));
+		}
+		playerList.setModel(new DefaultComboBoxModel<ComboItem>(pModel));
+	}
+	
 	public void updateTable() {
 		updateTableData((DefaultTableModel) table.getModel(), ((ComboItem) playerList.getSelectedItem()).getValue());
 	}

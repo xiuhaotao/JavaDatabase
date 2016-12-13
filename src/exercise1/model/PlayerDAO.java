@@ -98,8 +98,8 @@ public class PlayerDAO {
 			Statement stmt = db.getConnection().createStatement();
 			String sql;
 			sql = "UPDATE player SET first_name='" + p.getFirstName() + "', last_name='" + p.getLastName()
-					+ "', address='" + p.getAddress() + "', post_code='" + p.getPostCode() + "', province='"
-					+ p.getProvince() + "', phone_number='" + p.getPhoneNumber() + "') WHERE player_id=" + p.getId();
+					+ "', address='" + p.getAddress() + "', postal_code='" + p.getPostCode() + "', province='"
+					+ p.getProvince() + "', phone_number='" + p.getPhoneNumber() + "' WHERE player_id=" + p.getId();
 			stmt.execute(sql);
 			db.closeConnection(null, stmt);
 		} catch (SQLException se) {

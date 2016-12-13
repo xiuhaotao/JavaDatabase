@@ -26,10 +26,15 @@ public class PlayerEditWin extends JDialog {
 	private final JPanel contentPanel = new JPanel();
 	private JTextField firstNameTextField, lastNameTextField, addressTextField, postalCodeTextField, provinceTextField,
 			phoneNumberTextField;
+	private JButton okButton;
+	private MainWin pFrame;
 	private DataSource ds;
+	private int selectedId;
 
 	public PlayerEditWin(MainWin frame, String actionName, int id) {
 		super(frame, "Player", true);
+		pFrame = frame;
+		selectedId = id;
 		ds = DataSource.getInstance();
 		setBounds(100, 100, 240, 329);
 		setResizable(false);
@@ -125,11 +130,10 @@ public class PlayerEditWin extends JDialog {
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
-				JButton okButton = new JButton("Save");
+				okButton = new JButton("Save");
 				okButton.setActionCommand("OK");
 				buttonPane.add(okButton);
 				getRootPane().setDefaultButton(okButton);
-				okButton.addActionListener(addPlayerBtnHandler);
 			}
 			{
 				JButton cancelButton = new JButton("Cancel");
@@ -149,6 +153,9 @@ public class PlayerEditWin extends JDialog {
 				provinceTextField.setText(dto.getProvince());
 				phoneNumberTextField.setText(dto.getPhoneNumber());
 			}
+			okButton.addActionListener(updatePlayerBtnHandler);			
+		} else {
+			okButton.addActionListener(addPlayerBtnHandler);
 		}
 	}
 
@@ -170,6 +177,7 @@ public class PlayerEditWin extends JDialog {
 			postalCodeTextField.setText("");
 			provinceTextField.setText("");
 			phoneNumberTextField.setText("");
+			pFrame.updateComboBox();
 			dispose();
 		}
 	};
@@ -179,6 +187,7 @@ public class PlayerEditWin extends JDialog {
 		public void actionPerformed(ActionEvent e) {
 			PlayerDAO dao = new PlayerDAO(ds);
 			PlayerModel dto = new PlayerModel();
+			dto.setId(selectedId);
 			dto.setFirstName(firstNameTextField.getText());
 			dto.setLastName(lastNameTextField.getText());
 			dto.setAddress(addressTextField.getText());
@@ -192,6 +201,7 @@ public class PlayerEditWin extends JDialog {
 			postalCodeTextField.setText("");
 			provinceTextField.setText("");
 			phoneNumberTextField.setText("");
+			pFrame.updateComboBox();
 			dispose();
 		}
 	};
