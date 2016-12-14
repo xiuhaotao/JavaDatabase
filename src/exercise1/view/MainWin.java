@@ -2,7 +2,6 @@ package exercise1.view;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -20,7 +19,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
@@ -94,7 +92,6 @@ public class MainWin extends JFrame {
 		{
 			playerList = new JComboBox<ComboItem>();
 			updateComboBox();
-			playerList.addActionListener(playerListHandler);
 			panel_5.add(playerList);
 		}
 
@@ -124,6 +121,17 @@ public class MainWin extends JFrame {
 	}
 
 	public void updateComboBox() {
+		// save selected item, there is no selected item at first time.
+		int selectedItem = -1;
+		if (null != playerList.getSelectedItem()) {
+			selectedItem = ((ComboItem) playerList.getSelectedItem()).getValue();
+		}
+		
+		// when update the combobox model, should remove the listener first
+		// cause it will tigger a recall to access model
+		playerList.removeActionListener(playerListHandler);
+		
+		// update model.
 		playerList.removeAllItems();
 		Vector<ComboItem> pModel = new Vector<ComboItem>();
 		pModel.add(new ComboItem(-1, "ALL"));
@@ -132,8 +140,19 @@ public class MainWin extends JFrame {
 			pModel.add(new ComboItem(m.getId(), m.getFirstName() + " " + m.getLastName()));
 		}
 		playerList.setModel(new DefaultComboBoxModel<ComboItem>(pModel));
+		
+		// restore the selected item.
+		for (ComboItem item : pModel) {
+			if (item.getValue() == selectedItem) {
+				playerList.setSelectedItem(item);
+				break;
+			}
+			
+		}
+		
+		playerList.addActionListener(playerListHandler);
 	}
-	
+
 	public void updateTable() {
 		updateTableData((DefaultTableModel) table.getModel(), ((ComboItem) playerList.getSelectedItem()).getValue());
 	}
