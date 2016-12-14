@@ -202,6 +202,7 @@ public class PlayerEditWin extends JDialog {
 			provinceTextField.setText("");
 			phoneNumberTextField.setText("");
 			pFrame.updateComboBox();
+			pFrame.updateTable();
 			dispose();
 		}
 	};
